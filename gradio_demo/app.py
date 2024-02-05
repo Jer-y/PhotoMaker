@@ -61,7 +61,7 @@ pipe.id_encoder.to(device)
 pipe.scheduler = EulerDiscreteScheduler.from_config(pipe.scheduler.config)
 # pipe.set_adapters(["photomaker"], adapter_weights=[1.0])
 pipe.fuse_lora()
-
+pipe.enable_vae_slicing()
 @spaces.GPU(enable_queue=True)
 def generate_image(upload_images, prompt, negative_prompt, aspect_ratio_name, style_name, num_steps, style_strength_ratio, num_outputs, guidance_scale, seed, progress=gr.Progress(track_tqdm=True)):
     # check the trigger word
@@ -310,4 +310,4 @@ with gr.Blocks(css=css) as demo:
     
     gr.Markdown(article)
     
-demo.launch(share=False)
+demo.launch(share=True)
