@@ -49,6 +49,10 @@ pipe = PhotoMakerStableDiffusionXLPipeline.from_pretrained(
     variant="fp16",
     # local_files_only=True,
 ).to(device)
+# enable cpu offload to save GPU memory
+pipe.enable_model_cpu_offload()
+
+# enable slicing to save GPU memory
 pipe.enable_vae_slicing()
 
 pipe.load_photomaker_adapter(
