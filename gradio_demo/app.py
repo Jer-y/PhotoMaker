@@ -40,7 +40,7 @@ photomaker_ckpt = hf_hub_download(repo_id="TencentARC/PhotoMaker", filename="pho
 if device == "mps":
     torch_dtype = torch.float16
 else:
-    torch_dtype = torch.bfloat16
+    torch_dtype = torch.float16
 
 pipe = PhotoMakerStableDiffusionXLPipeline.from_pretrained(
     base_model_path, 
@@ -50,7 +50,7 @@ pipe = PhotoMakerStableDiffusionXLPipeline.from_pretrained(
     # local_files_only=True,
 ).to(device)
 # enable cpu offload to save GPU memory
-pipe.enable_model_cpu_offload()
+# pipe.enable_model_cpu_offload()
 
 # enable slicing to save GPU memory
 pipe.enable_vae_slicing()
